@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Query, DefaultValuePipe, ParseIntPipe } from '@nestjs/common';
 import { InvestmentService } from './investment.service';
 import { InvestmentDto } from './dto/investment.dto';
 
@@ -25,11 +18,21 @@ export class InvestmentController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.investmentService.findOne(+id);
+    return this.investmentService.findOneId(+id);
+  }
+
+  @Get('user/:owner')
+  findOwner(
+    @Param('owner') owner: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+  ) {
+    limit = limit > 100 ? 100 : limit;
+    return this.investmentService.findForOwner(owner,{page,limit})
   }
 
   @Patch(':id')
   withdraw(@Param('id') id: number) {
-    return this.investmentService.withdraw(id);
+    return this.investmentService.withdraw(+id);
   }
 }

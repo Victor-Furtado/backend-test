@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { NotBrackets, Repository } from 'typeorm';
 import { InvestmentDto } from './dto/investment.dto';
 import { Investment } from './investment.entity';
 
@@ -33,7 +33,13 @@ export class InvestmentService {
     options: IPaginationOptions,
   ): Promise<Pagination<Investment>> {
     const investments = this.InvestmentRepository.createQueryBuilder('i');
-    investments.where('c.owner = :owner', { owner });
+    investments.where('i.owner = :owner', { owner }).andWhere(
+      new NotBrackets((qb) =>
+        qb.where('i.withdraw_amount != :withdraw_amount', {
+          withdraw_amount: null,
+        }),
+      ),
+    );
     return paginate<Investment>(this.InvestmentRepository, options);
   }
 
