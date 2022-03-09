@@ -19,6 +19,7 @@ export class InvestmentService {
   ) {}
 
   create(createInvestmentDto: InvestmentDto): Promise<Investment> {
+    if(!createInvestmentDto.creation_date) createInvestmentDto.creation_date = new Date(); 
     const investment = this.InvestmentRepository.create(createInvestmentDto);
     return this.InvestmentRepository.save(investment);
   }

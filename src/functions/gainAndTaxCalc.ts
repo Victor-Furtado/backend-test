@@ -17,6 +17,8 @@ export default (investment: Investment): number => {
   const years = Math.floor((end - start) / 31557600000);
   const months = Math.floor((end - start) / 2419200000) - 1;
 
+  if (months < 1) return parseFloat(investment.initial_amount.toFixed(2));
+
   const taxes = tax(years);
   const gains = gain(investment.initial_amount, months);
 

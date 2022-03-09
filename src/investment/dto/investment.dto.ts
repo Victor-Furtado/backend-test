@@ -1,5 +1,11 @@
+import { IsDate, IsEmail, IsNotEmpty } from "class-validator";
+
 export class InvestmentDto {
-  owner?: string;
+  @IsEmail()
+  owner: string;
+
+  @IsNotEmpty()
   initial_amount: number;
+
   creation_date: Date;
 }

@@ -17,6 +17,6 @@ export class Investment {
   @Column({ nullable: true })
   withdraw_date: Date;
 
-  @Column()
+  @Column({default: ()=>'CURRENT_TIMESTAMP'})
   creation_date: Date;
 }
