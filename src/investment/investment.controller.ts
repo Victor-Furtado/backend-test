@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { InvestmentService } from './investment.service';
 import { InvestmentDto } from './dto/investment.dto';
+import Calc from '../functions/gainAndTaxCalc';
 
 @Controller('investment')
 export class InvestmentController {
@@ -28,7 +29,10 @@ export class InvestmentController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.investmentService.findOneId(+id);
+    return this.investmentService.findOneId(+id).then((investment) => ({
+      ...investment,
+      expected_amount: Calc(investment),
+    }));
   }
 
   @Get('owner/:email')

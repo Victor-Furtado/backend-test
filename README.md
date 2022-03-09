@@ -11,7 +11,7 @@ The application was write in **[typescript](https://www.typescriptlang.org/)** u
 - [NestJs](https://nestjs.com/), a progressive Node.js framework for building efficient, reliable and scalable server-side applications.
 - [TypeORM](https://typeorm.io/#/), a [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can run in many platforms and can be used with TypeScript and JavaScript (newest ones).
 ## TODO LIST
-- Create Investment (Date and Amount)
+- Create Investment (Owner, Date, Amount)
 - Read all Investment
 - Read one Investment (by id) (Show Initial Amount and Expected Balance `amount+gains`)
 - Withdraw Investment (`amount+gains`)(apply Taxes)
