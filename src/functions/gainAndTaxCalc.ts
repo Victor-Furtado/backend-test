@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { Investment } from 'src/investment/investment.entity';
 
 export const tax = (timeInYears: number): number => {
@@ -12,11 +11,16 @@ export const gain = (amount: number, timeInMonths: number): number => {
 };
 
 export default (investment: Investment): number => {
-  const start = moment(investment.creation_date);
-  const end = moment(investment.withdraw_date);
+  const start: number = +investment.creation_date;
+  const end: number = +investment.withdraw_date;
 
-  const taxes = tax(end.diff(start, 'years'));
-  const gains = gain(investment.initial_amount, end.diff(start, 'months'));
+  const years = Math.floor((end - start) / 31557600000);
+  const months = Math.floor((end - start) / 2419200000) - 1;
 
-  return investment.initial_amount - gains * (1 - taxes);
+  const taxes = tax(years);
+  const gains = gain(investment.initial_amount, months);
+
+  return parseFloat(
+    (investment.initial_amount + gains * (1 - taxes)).toFixed(2),
+  );
 };

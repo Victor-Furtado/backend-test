@@ -5,7 +5,6 @@ import { InvestmentDto } from './dto/investment.dto';
 import { Investment } from './investment.entity';
 
 import Calc from '../functions/gainAndTaxCalc';
-import paginateResponse from 'src/functions/paginationResponse';
 import {
   IPaginationOptions,
   paginate,
@@ -33,13 +32,7 @@ export class InvestmentService {
     options: IPaginationOptions,
   ): Promise<Pagination<Investment>> {
     const investments = this.InvestmentRepository.createQueryBuilder('i');
-    investments.where('i.owner = :owner', { owner }).andWhere(
-      new NotBrackets((qb) =>
-        qb.where('i.withdraw_amount != :withdraw_amount', {
-          withdraw_amount: null,
-        }),
-      ),
-    );
+    investments.where('i.owner = :owner', { owner });
     return paginate<Investment>(this.InvestmentRepository, options);
   }
 
@@ -55,10 +48,11 @@ export class InvestmentService {
 
   async withdraw(id: number) {
     const investment = await this.findOneId(id);
+    if (investment.withdraw_date)
+      return `This investment has already been withdrawn`;
     investment.withdraw_date = new Date();
     investment.withdraw_amount = Calc(investment);
-    return `You withdrew $${investment.withdraw_amount.toFixed(
-      2,
-    )}, Congratulations!`;
+    this.InvestmentRepository.save(investment);
+    return `You withdrew $${investment.withdraw_amount}, Congratulations!`;
   }
 }
