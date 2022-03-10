@@ -12,7 +12,9 @@ export const gain = (amount: number, timeInMonths: number): number => {
 
 export default (investment: Investment): number => {
   const start: number = +investment.creation_date;
-  const end: number = +investment.withdraw_date;
+  const end: number = investment.withdraw_date
+    ? +investment.withdraw_date
+    : +new Date();
 
   const years = Math.floor((end - start) / 31557600000);
   const months = Math.floor((end - start) / 2419200000) - 1;
