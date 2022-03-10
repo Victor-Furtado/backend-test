@@ -8,6 +8,7 @@
 ## Technology stack
 [#TODO: Select a database]
 The application was write in **[typescript](https://www.typescriptlang.org/)** using
+- [SQLite](https://sqlite.org/index.html), SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.
 - [NestJs](https://nestjs.com/), a progressive Node.js framework for building efficient, reliable and scalable server-side applications.
 - [TypeORM](https://typeorm.io/#/), a [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) that can run in many platforms and can be used with TypeScript and JavaScript (newest ones).
 ## TODO LIST
@@ -15,3 +16,4 @@ The application was write in **[typescript](https://www.typescriptlang.org/)** u
 - Read all Investment
 - Read one Investment (by id) (Show Initial Amount and Expected Balance `amount+gains`)
 - Withdraw Investment (`amount+gains`)(apply Taxes)
+- Get Investments of a owner with pagination
