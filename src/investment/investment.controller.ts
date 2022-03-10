@@ -29,10 +29,10 @@ export class InvestmentController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.investmentService.findOneId(+id).then((investment) => ({
-      ...investment,
-      expected_amount: Calc(investment),
-    }));
+    return this.investmentService.findOneId(+id).then((res) => {
+      res.data.expectedAmount = Calc(res.data);
+      return res;
+    });
   }
 
   @Get('owner/:email')
