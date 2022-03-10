@@ -1,12 +1,11 @@
 # Back End Test Project <img src="https://coderockr.com/assets/images/coderockr.svg"  align="right"  height="50px"  />
+[See API docs](https://github.com/Victor-Furtado/backend-test/blob/main/Doc.md)
 ## How to Start?
-[#TODO: Add database]
 1. Have [node](https://nodejs.org/en/) installed
 2. Edit `ormconfig.env` file with your DB connection
 3. `npm i` or `yarn` to install all dependencies
 4. `npm run start` or `yarn start` to serve the app locally
 ## Technology stack
-[#TODO: Select a database]
 The application was write in **[typescript](https://www.typescriptlang.org/)** using
 - [SQLite](https://sqlite.org/index.html), SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.
 - [NestJs](https://nestjs.com/), a progressive Node.js framework for building efficient, reliable and scalable server-side applications.
